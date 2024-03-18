@@ -25,9 +25,10 @@ void PhaseEndingAnimation::Init(App *app) {
             RESOURCE_DIR "/Picture/Character/Normal/Walk3.png",
         },
         true, 120);
+    std::dynamic_pointer_cast<AnimatedObject>(m_Character)->SetScale({3, 3});
+    std::dynamic_pointer_cast<AnimatedObject>(m_Character)
+        ->SetPosition({0, 30});
     m_Character->SetZIndex(10);
-    dynamic_cast<AnimatedObject *>(m_Character.get())->SetScale({3, 3});
-    dynamic_cast<AnimatedObject *>(m_Character.get())->SetPosition({0, 30});
     app->GetRoot()->AddChild(m_Character);
 }
 
@@ -41,14 +42,15 @@ void PhaseEndingAnimation::Update(App *app) {
     if (m_Background->GetPosition().x + delta_x >= 3840 && m_IsScrolling) {
 
         // set background to border of screen
-        m_Background->SetPosition({3840.0, 0});
+        m_Background->SetPosition({3840, 0});
 
         // set character to idle
         app->GetRoot()->RemoveChild(m_Character);
         m_Character = std::make_shared<ImageObject>(
             RESOURCE_DIR "/Picture/Character/Normal/Idle1.png");
-        dynamic_cast<ImageObject *>(m_Character.get())->SetScale({3, 3});
-        dynamic_cast<ImageObject *>(m_Character.get())->SetPosition({0, 30});
+        std::dynamic_pointer_cast<ImageObject>(m_Character)->SetScale({3, 3});
+        std::dynamic_pointer_cast<ImageObject>(m_Character)
+            ->SetPosition({0, 30});
         m_Character->SetZIndex(10);
         app->GetRoot()->AddChild(m_Character);
 
