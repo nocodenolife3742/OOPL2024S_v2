@@ -11,4 +11,3 @@ void PhaseMenu::Update(App *app) {
 void PhaseMenu::Leave(App *app) {
     LOG_DEBUG("PhaseMenu::Leave()");
 }
-

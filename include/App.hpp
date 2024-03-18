@@ -1,12 +1,11 @@
 #ifndef APP_HPP
 #define APP_HPP
 
-#include "pch.hpp"
-#include "Util/Root.hpp"
 #include "Core/Context.hpp"
+#include "Util/Root.hpp"
+#include "pch.hpp"
 
 class Phase;
-
 
 class App {
 public:
@@ -24,7 +23,7 @@ public:
 
     [[nodiscard]] State GetState() const;
 
-    [[nodiscard]] Util::Root GetRoot() const;
+    [[nodiscard]] std::shared_ptr<Util::Root> GetRoot() const;
 
     [[nodiscard]] std::shared_ptr<Core::Context> GetContext() const;
 
@@ -35,7 +34,7 @@ public:
 private:
     std::unique_ptr<Phase> m_CurrentPhase;
     State m_CurrentState;
-    Util::Root m_Root;
+    std::shared_ptr<Util::Root> m_Root;
     std::shared_ptr<Core::Context> m_Context;
 };
 
