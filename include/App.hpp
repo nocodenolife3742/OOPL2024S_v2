@@ -16,7 +16,6 @@ public:
         STAGE,
         LOSE,
         ENDING_ANIMATION,
-        END,
     };
 
     void ChangeState(State state);

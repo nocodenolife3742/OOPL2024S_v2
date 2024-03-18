@@ -16,8 +16,8 @@ list(TRANSFORM INCLUDE_FILES PREPEND ${INCLUDE_DIR}/)
 # file(GLOB_RECURSE HEADER_FILES include/*)
 
 add_executable(${PROJECT_NAME}
-        ${SRC_DIR}/main.cpp
         ${SRC_FILES}
+        ${INCLUDE_FILES}
         ${HEADER_FILES}
 )
 

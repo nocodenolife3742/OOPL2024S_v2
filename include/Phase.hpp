@@ -5,11 +5,11 @@
 
 class Phase {
 public:
-    virtual void init(App *app) = 0;
+    virtual void Init(App *app) = 0;
 
-    virtual void update(App *app) = 0;
+    virtual void Update(App *app) = 0;
 
-    virtual void leave(App *app) = 0;
+    virtual void Leave(App *app) = 0;
 
     virtual ~Phase() = default;
 
