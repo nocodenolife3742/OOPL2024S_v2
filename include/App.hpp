@@ -1,29 +1,43 @@
 #ifndef APP_HPP
 #define APP_HPP
 
-#include "pch.hpp" // IWYU pragma: export
+#include "pch.hpp"
+#include "Util/Root.hpp"
+#include "Core/Context.hpp"
+
+class Phase;
+
 
 class App {
 public:
     enum class State {
-        START,
-        UPDATE,
+        TITLE,
+        MENU,
+        STAGE,
+        LOSE,
+        ENDING_ANIMATION,
         END,
     };
 
-    State GetCurrentState() const { return m_CurrentState; }
-
-    void Start();
+    void ChangeState(State state);
 
     void Update();
 
-    void End(); // NOLINT(readability-convert-member-functions-to-static)
+    [[nodiscard]] State GetState() const;
+
+    [[nodiscard]] Util::Root GetRoot() const;
+
+    [[nodiscard]] std::shared_ptr<Core::Context> GetContext() const;
+
+    explicit App(State state);
+
+    ~App();
 
 private:
-    void ValidTask();
-
-private:
-    State m_CurrentState = State::START;
+    std::unique_ptr<Phase> m_CurrentPhase;
+    State m_CurrentState;
+    Util::Root m_Root;
+    std::shared_ptr<Core::Context> m_Context;
 };
 
-#endif
+#endif // APP_HPP

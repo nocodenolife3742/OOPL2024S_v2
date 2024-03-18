@@ -1,29 +1,70 @@
 #include "App.hpp"
+#include "Phase.hpp"
 
-#include "Util/Image.hpp"
-#include "Util/Input.hpp"
-#include "Util/Keycode.hpp"
-#include "Util/Logger.hpp"
+void App::ChangeState(State state) {
+    // leave the old state
+    if (m_CurrentPhase)
+        m_CurrentPhase->leave(this);
 
-void App::Start() {
-    LOG_TRACE("Start");
-    m_CurrentState = State::UPDATE;
+    // create the new state
+    m_CurrentState = state;
+    switch (state) {
+        case State::TITLE:
+            // m_CurrentPhase = std::make_unique<Phase>();
+            break;
+
+        case State::MENU:
+            //m_CurrentPhase = std::make_unique<Phase>();
+            break;
+
+        case State::STAGE:
+            // m_CurrentPhase = std::make_unique<Phase>();
+            break;
+
+        case State::LOSE:
+            // m_CurrentPhase = std::make_unique<Phase>();
+            break;
+
+        case State::ENDING_ANIMATION:
+            //m_CurrentPhase = std::make_unique<Phase>();
+            break;
+
+        case State::END:
+            //m_CurrentPhase = std::make_unique<Phase>();
+            break;
+    }
+
+    // initialize the new state
+    if (m_CurrentPhase)
+        m_CurrentPhase->init(this);
 }
 
 void App::Update() {
-    
-    //TODO: do your things here and delete this line <3
-    
-    /*
-     * Do not touch the code below as they serve the purpose for
-     * closing the window.
-     */
-    if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) ||
-        Util::Input::IfExit()) {
-        m_CurrentState = State::END;
-    }
+    // update the current state
+    if (m_CurrentPhase)
+        m_CurrentPhase->update(this);
 }
 
-void App::End() { // NOLINT(this method will mutate members in the future)
-    LOG_TRACE("End");
+App::State App::GetState() const {
+    // get the current state
+    return m_CurrentState;
 }
+
+Util::Root App::GetRoot() const {
+    return m_Root;
+}
+
+App::App(State state) : m_CurrentPhase(nullptr), m_CurrentState(state), m_Root(Util::Root()),
+                        m_Context(Core::Context::GetInstance()) {}
+
+App::~App() {
+    // leave the current state
+    if (m_CurrentPhase)
+        m_CurrentPhase->leave(this);
+}
+
+std::shared_ptr<Core::Context> App::GetContext() const {
+    return m_Context;
+}
+
+
