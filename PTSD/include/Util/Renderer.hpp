@@ -1,5 +1,5 @@
-#ifndef UTIL_ROOT_HPP
-#define UTIL_ROOT_HPP
+#ifndef UTIL_RENDERER_HPP
+#define UTIL_RENDERER_HPP
 
 #include <memory>
 #include <vector>
@@ -9,47 +9,60 @@
 class App;
 
 namespace Util {
-class Root final {
+class Renderer final {
 public:
     /**
      * @brief Parameterized constructor.
-     *`
      *
-     * @param children The GameObject needing to be managed by the root.
+     * @param children The GameObject needing to be managed by the renderer.
      */
-    Root(const std::vector<std::shared_ptr<GameObject>> &children = {});
+    explicit Renderer(
+        const std::vector<std::shared_ptr<GameObject>> &children = {});
 
     /**
-     * @brief Add a child to the root.
+     * @brief Add a child to the renderer.
      *
-     * @param child The GameObject needing to be managed by the root.
+     * @param child The GameObject needing to be managed by the renderer.
      */
     void AddChild(const std::shared_ptr<GameObject> &child);
 
     /**
-     * @brief Add children to the root.
+     * @brief Add children to the renderer.
      *
-     * @param children The GameObjects needing to be managed by the root.
+     * @param children The GameObjects needing to be managed by the renderer.
      */
     void AddChildren(const std::vector<std::shared_ptr<GameObject>> &children);
 
     /**
-     * @brief Remove the child.
+     * @brief Remove the child from the renderer.
      *
      * @param child The GameObject being removed.
      */
     void RemoveChild(std::shared_ptr<GameObject> child);
 
     /**
+     * @brief Remove children.
+     *
+     * @param children The GameObjects being removed.
+     */
+    void
+    RemoveChildren(const std::vector<std::shared_ptr<GameObject>> &children);
+
+    /**
+     * @brief All GameObjects in the renderer will be removed.
+     */
+    void RemoveAllChildren();
+
+    /**
      * @brief Draw children according to their z-index.
      *
      * @note The user is not recommended to modify this function.
      */
-    void Update();
+    void Update(const glm::vec2 &renderOffset = {0.0f, 0.0f});
 
 private:
     std::vector<std::shared_ptr<GameObject>> m_Children;
 };
 } // namespace Util
 
-#endif
+#endif // UTIL_RENDERER_HPP
