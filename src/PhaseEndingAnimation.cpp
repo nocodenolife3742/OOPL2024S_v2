@@ -3,8 +3,6 @@
 #include "Util/Time.hpp"
 
 void PhaseEndingAnimation::Init(App *app) {
-    LOG_DEBUG("PhaseEndingAnimation::Init()");
-
     // init scrolling
     m_IsScrolling = true;
 
@@ -33,8 +31,6 @@ void PhaseEndingAnimation::Init(App *app) {
 }
 
 void PhaseEndingAnimation::Update(App *app) {
-    LOG_DEBUG("PhaseEndingAnimation::Update()");
-
     // calculate delta x for scrolling
     double delta_x = Util::Time::GetDeltaTime() * 600;
 
@@ -75,11 +71,11 @@ void PhaseEndingAnimation::Update(App *app) {
 }
 
 void PhaseEndingAnimation::Leave(App *app) {
-    LOG_DEBUG("PhaseEndingAnimation::Leave()");
-
-    // remove background
+    // free background resources
     app->GetRoot()->RemoveChild(m_Background);
+    m_Background = nullptr;
 
-    // remove character
+    // free character resources
     app->GetRoot()->RemoveChild(m_Character);
+    m_Character = nullptr;
 }

@@ -10,8 +10,6 @@ void PhaseTitle::Init(App *app) {
                                  RESOURCE_DIR "/Picture/UI/Title2.png"},
         true, 500);
     m_Background->SetScale({3, 3});
-
-    // add to root
     app->GetRoot()->AddChild(m_Background);
 }
 
@@ -34,7 +32,7 @@ void PhaseTitle::Update(App *app) {
 void PhaseTitle::Leave(App *app) {
     LOG_DEBUG("PhaseTitle::Leave()");
 
-    // remove from root
-    app->GetRoot()->RemoveChild(m_Background);
+    // free background resources
+    app->GetRoot()->RemoveAllChildren();
     m_Background = nullptr;
 }

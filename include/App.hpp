@@ -2,8 +2,7 @@
 #define APP_HPP
 
 #include "Core/Context.hpp"
-#include "Util/Root.hpp"
-#include "pch.hpp"
+#include "Util/Renderer.hpp"
 
 class Phase;
 
@@ -23,9 +22,11 @@ public:
 
     [[nodiscard]] State GetState() const;
 
-    [[nodiscard]] std::shared_ptr<Util::Root> GetRoot() const;
+    [[nodiscard]] std::shared_ptr<Util::Renderer> GetRoot() const;
 
     [[nodiscard]] std::shared_ptr<Core::Context> GetContext() const;
+
+    [[nodiscard]] glm::vec2 GetCameraPosition() const;
 
     explicit App(State state);
 
@@ -34,8 +35,9 @@ public:
 private:
     std::unique_ptr<Phase> m_CurrentPhase;
     State m_CurrentState;
-    std::shared_ptr<Util::Root> m_Root;
+    std::shared_ptr<Util::Renderer> m_Root;
     std::shared_ptr<Core::Context> m_Context;
+    glm::vec2 m_CameraPosition;
 };
 
 #endif // APP_HPP

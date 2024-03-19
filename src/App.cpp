@@ -4,6 +4,7 @@
 #include "PhaseMenu.hpp"
 #include "PhaseStage.hpp"
 #include "PhaseTitle.hpp"
+#include "Util/Input.hpp"
 
 void App::ChangeState(State state) {
     // leave the old state
@@ -44,11 +45,16 @@ void App::Update() {
     if (m_CurrentPhase)
         m_CurrentPhase->Update(this);
 
-    // update the root
-    m_Root->Update();
+    // render the root at the camera position
+    m_Root->Update(-m_CameraPosition);
 
     // update the context
     m_Context->Update();
+
+    // if pressed ESC, exit the app
+    if (Util::Input::IsKeyPressed(Util::Keycode::ESCAPE)) {
+        m_Context->SetExit(true);
+    }
 }
 
 App::State App::GetState() const {
@@ -56,15 +62,20 @@ App::State App::GetState() const {
     return m_CurrentState;
 }
 
-std::shared_ptr<Util::Root> App::GetRoot() const {
+std::shared_ptr<Util::Renderer> App::GetRoot() const {
     return m_Root;
+}
+
+glm::vec2 App::GetCameraPosition() const {
+    return m_CameraPosition;
 }
 
 App::App(State state)
     : m_CurrentPhase(nullptr),
       m_CurrentState(state),
-      m_Root(std::make_shared<Util::Root>()),
-      m_Context(Core::Context::GetInstance()) {
+      m_Root(std::make_shared<Util::Renderer>()),
+      m_Context(Core::Context::GetInstance()),
+      m_CameraPosition({0, 0}) {
     ChangeState(state);
 }
 

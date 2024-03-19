@@ -2,7 +2,8 @@
 #include "Core/Context.hpp"
 
 int main(int, char **) {
-    App app(App::State::ENDING_ANIMATION);
+
+    App app(App::State::TITLE);
 
     while (!app.GetContext()->GetExit()) {
         app.Update();

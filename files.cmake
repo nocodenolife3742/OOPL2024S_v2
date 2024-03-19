@@ -11,6 +11,7 @@ set(SRC_FILES
         # Components
         Component/AnimatedObject.cpp
         Component/ImageObject.cpp
+        Component/TxtConverter.cpp
 )
 
 set(INCLUDE_FILES
@@ -27,6 +28,7 @@ set(INCLUDE_FILES
         # Components
         Component/AnimatedObject.hpp
         Component/ImageObject.hpp
+        Component/TxtConverter.hpp
 )
 
 set(TEST_FILES
