@@ -2,8 +2,6 @@
 #include "Util/Input.hpp"
 
 void PhaseTitle::Init(App *app) {
-    LOG_DEBUG("PhaseTitle::Init()");
-
     // init background
     m_Background = std::make_shared<AnimatedObject>(
         std::vector<std::string>{RESOURCE_DIR "/Picture/UI/Title1.png",
@@ -14,24 +12,14 @@ void PhaseTitle::Init(App *app) {
 }
 
 void PhaseTitle::Update(App *app) {
-    LOG_DEBUG("PhaseTitle::Update()");
-
     // if enter is pressed
     if (Util::Input::IsKeyUp(Util::Keycode::RETURN)) {
         app->ChangeState(App::State::MENU);
         return;
     }
-
-    // if escape is pressed
-    if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE)) {
-        app->GetContext()->SetExit(true);
-        return;
-    }
 }
 
 void PhaseTitle::Leave(App *app) {
-    LOG_DEBUG("PhaseTitle::Leave()");
-
     // free background resources
     app->GetRoot()->RemoveAllChildren();
     m_Background = nullptr;

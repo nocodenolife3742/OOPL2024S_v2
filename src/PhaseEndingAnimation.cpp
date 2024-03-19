@@ -60,10 +60,8 @@ void PhaseEndingAnimation::Update(App *app) {
         m_Background->SetPosition({m_Background->GetPosition().x + delta_x, 0});
     }
 
-    // if escape key is pressed or enter key is pressed and not scrolling
-    if ((Util::Input::IsKeyUp(Util::Keycode::RETURN) && !m_IsScrolling) ||
-        Util::Input::IsKeyUp(Util::Keycode::ESCAPE)) {
-
+    // if enter key is pressed and not scrolling
+    if (Util::Input::IsKeyUp(Util::Keycode::RETURN) && !m_IsScrolling) {
         // exit app
         app->GetContext()->SetExit(true);
         return;
