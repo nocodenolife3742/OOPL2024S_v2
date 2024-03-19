@@ -57,6 +57,10 @@ void App::Update() {
     }
 }
 
+void App::SetCameraPosition(const glm::vec2 &position) {
+    m_CameraPosition = position;
+}
+
 App::State App::GetState() const {
     // get the current state
     return m_CurrentState;

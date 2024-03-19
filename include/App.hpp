@@ -20,6 +20,8 @@ public:
 
     void Update();
 
+    void SetCameraPosition(const glm::vec2 &position);
+
     [[nodiscard]] State GetState() const;
 
     [[nodiscard]] std::shared_ptr<Util::Renderer> GetRoot() const;
