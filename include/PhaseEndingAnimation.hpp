@@ -7,8 +7,6 @@
 #include "Util/GameObject.hpp"
 
 class PhaseEndingAnimation : public Phase {
-    using Phase::Phase;
-
 public:
     void Init(App *app) override;
 
@@ -16,10 +14,13 @@ public:
 
     void Leave(App *app) override;
 
+    explicit PhaseEndingAnimation(App::State lastState)
+        : Phase(lastState){};
+
 private:
-    bool m_IsScrolling;
-    std::shared_ptr<ImageObject> m_Background;
-    std::shared_ptr<Util::GameObject> m_Character;
+    bool m_IsScrolling = false;
+    std::shared_ptr<ImageObject> m_Background = nullptr;
+    std::shared_ptr<Util::GameObject> m_Character = nullptr;
 };
 
 #endif // PHASE_ENDING_ANIMATION_HPP

@@ -3,7 +3,6 @@
 #include "Util/Time.hpp"
 
 void PhaseEndingAnimation::Init(App *app) {
-    LOG_DEBUG("good");
     // init scrolling
     m_IsScrolling = true;
 

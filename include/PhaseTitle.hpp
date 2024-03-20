@@ -5,14 +5,15 @@
 #include "Component/Phase.hpp"
 
 class PhaseTitle : public Phase {
-    using Phase::Phase;
-
 public:
     void Init(App *app) override;
 
     void Update(App *app) override;
 
     void Leave(App *app) override;
+
+    explicit PhaseTitle(App::State lastState)
+        : Phase(lastState){};
 
 private:
     std::shared_ptr<AnimatedObject> m_Background;

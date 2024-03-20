@@ -11,7 +11,7 @@ set(SRC_FILES
         Component/Phase.cpp
         Component/AnimatedObject.cpp
         Component/ImageObject.cpp
-        Component/TxtConverter.cpp
+        Component/TileMap.cpp
 )
 
 set(INCLUDE_FILES
@@ -27,7 +27,7 @@ set(INCLUDE_FILES
         Component/Phase.hpp
         Component/AnimatedObject.hpp
         Component/ImageObject.hpp
-        Component/TxtConverter.hpp
+        Component/TileMap.hpp
 )
 
 set(TEST_FILES
