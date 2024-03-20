@@ -11,9 +11,11 @@ public:
 
     virtual void Leave(App *app) = 0;
 
-    virtual ~Phase() = default;
+    ~Phase() = default;
 
     Phase() = default;
+private:
+    App::State m_LastState;
 };
 
 #endif // PHASE_HPP

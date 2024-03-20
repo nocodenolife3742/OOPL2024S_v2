@@ -22,6 +22,8 @@ public:
 
     void SetCameraPosition(const glm::vec2 &position);
 
+    void ResetCameraPosition();
+
     [[nodiscard]] State GetState() const;
 
     [[nodiscard]] std::shared_ptr<Util::Renderer> GetRoot() const;

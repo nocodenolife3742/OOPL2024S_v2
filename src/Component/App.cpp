@@ -7,33 +7,36 @@
 #include "Util/Input.hpp"
 
 void App::ChangeState(State state) {
+    // reset the camera position
+    ResetCameraPosition();
+
     // leave the old state
     if (m_CurrentPhase)
         m_CurrentPhase->Leave(this);
 
     // create the new state
-    m_CurrentState = state;
     switch (state) {
     case State::TITLE:
-        m_CurrentPhase = std::make_unique<PhaseTitle>();
+        m_CurrentPhase = std::make_unique<PhaseTitle>(m_CurrentState);
         break;
 
     case State::MENU:
-        m_CurrentPhase = std::make_unique<PhaseMenu>();
+        m_CurrentPhase = std::make_unique<PhaseMenu>(m_CurrentState);
         break;
 
     case State::STAGE:
-        m_CurrentPhase = std::make_unique<PhaseStage>();
+        m_CurrentPhase = std::make_unique<PhaseStage>(m_CurrentState);
         break;
 
     case State::LOSE:
-        m_CurrentPhase = std::make_unique<PhaseLose>();
+        m_CurrentPhase = std::make_unique<PhaseLose>(m_CurrentState);
         break;
 
     case State::ENDING_ANIMATION:
-        m_CurrentPhase = std::make_unique<PhaseEndingAnimation>();
+        m_CurrentPhase = std::make_unique<PhaseEndingAnimation>(m_CurrentState);
         break;
     }
+    m_CurrentState = state;
 
     // initialize the new state
     if (m_CurrentPhase)
@@ -59,6 +62,10 @@ void App::Update() {
 
 void App::SetCameraPosition(const glm::vec2 &position) {
     m_CameraPosition = position;
+}
+
+void App::ResetCameraPosition() {
+    m_CameraPosition = {0, 0};
 }
 
 App::State App::GetState() const {
