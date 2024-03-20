@@ -16,7 +16,8 @@ public:
         : Phase(lastState){};
 
 private:
-    TileMap::Map m_Map = {};
+    std::vector<std::shared_ptr<Util::GameObject>> m_BackgroundObjects;
+    std::vector<std::shared_ptr<Util::GameObject>> m_ForegroundObjects;
 };
 
 #endif // PHASE_STAGE_HPP

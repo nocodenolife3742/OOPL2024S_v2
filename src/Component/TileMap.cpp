@@ -2,7 +2,6 @@
 #include "Component/ImageObject.hpp"
 #include "Util/LoadTextFile.hpp"
 #include <sstream>
-#include <utility>
 
 std::vector<std::vector<int>> TileMap::ConvertToTiles(const std::string &path) {
     std::vector<std::vector<int>> result;
@@ -34,33 +33,67 @@ glm::vec2 TileMap::GetTilePosition(const int &x, const int &y) {
     return {positionX, positionY};
 }
 
-TileMap::Map::Map(std::string stageName)
-    : m_StageName(std::move(stageName)) {
+std::vector<std::shared_ptr<Util::GameObject>>
+TileMap::GetBackgroundObjects(const std::string &stageName) {
+    // initialize result
+    std::vector<std::shared_ptr<Util::GameObject>> result;
+
     // load tiles
     std::vector<std::vector<int>> tiles =
-        ConvertToTiles(RESOURCE_DIR "/Map/BackGround/" + m_StageName + ".txt");
+        ConvertToTiles(RESOURCE_DIR "/Map/BackGround/" + stageName + ".txt");
 
-    // set objects
+    // set object objects
     for (std::size_t x = 0; x < tiles.size(); x++) {
         for (std::size_t y = 0; y < tiles[x].size(); y++) {
-            // skip empty
+            // skip empty tiles
             if (tiles[x][y] == 0)
                 continue;
 
             // set object
-            std::string path = RESOURCE_DIR "/Picture/Tiles/" + m_StageName +
-                               "/BackGround/" + std::to_string(tiles[x][y]) +
-                               ".png";
-            auto object = std::make_shared<ImageObject>(path);
+            std::shared_ptr<ImageObject> object = std::make_shared<ImageObject>(
+                RESOURCE_DIR "/Picture/Tiles/" + stageName + "/BackGround/" +
+                std::to_string(tiles[x][y]) + ".png");
             object->SetPosition(
                 GetTilePosition(static_cast<int>(x), static_cast<int>(y)));
             object->SetScale(SCALE);
-            m_Objects.push_back(object);
+            object->SetZIndex(0);
+            result.push_back(object);
         }
     }
+
+    // return result
+    return result;
 }
 
+// TODO: add collision detection object with object
 std::vector<std::shared_ptr<Util::GameObject>>
-TileMap::Map::GetObjects() const {
-    return m_Objects;
+TileMap::GetForegroundObjects(const std::string &stageName) {
+    // initialize result
+    std::vector<std::shared_ptr<Util::GameObject>> result;
+
+    // load tiles
+    std::vector<std::vector<int>> tiles =
+        ConvertToTiles(RESOURCE_DIR "/Map/Object/" + stageName + ".txt");
+
+    // set object objects
+    for (std::size_t x = 0; x < tiles.size(); x++) {
+        for (std::size_t y = 0; y < tiles[x].size(); y++) {
+            // skip empty tiles
+            if (tiles[x][y] == 0)
+                continue;
+
+            // set object
+            std::shared_ptr<ImageObject> object = std::make_shared<ImageObject>(
+                RESOURCE_DIR "/Picture/Tiles/" + stageName + "/Object/" +
+                std::to_string(tiles[x][y]) + ".png");
+            object->SetPosition(
+                GetTilePosition(static_cast<int>(x), static_cast<int>(y)));
+            object->SetScale(SCALE);
+            object->SetZIndex(20);
+            result.push_back(object);
+        }
+    }
+
+    // return result
+    return result;
 }

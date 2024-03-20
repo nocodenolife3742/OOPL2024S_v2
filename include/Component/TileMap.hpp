@@ -7,6 +7,7 @@
 #include <vector>
 
 namespace TileMap {
+
 const glm::vec2 SCALE = {3, 3};
 const glm::vec2 TILE_SIZE = {32, 32};
 
@@ -23,32 +24,24 @@ std::vector<std::vector<int>> ConvertToTiles(const std::string &path);
  * @param y the y position of the tile
  * @return the position of the tile
  */
-glm::vec2 GetTilePosition(const int &x, const int &y);
+inline glm::vec2 GetTilePosition(const int &x, const int &y);
 
-class Map {
-public:
-    /**
-     * @brief Construct a new Map object
-     * @param stageName the name of the stage, this will be used to load the txt
-     * file
-     */
-    explicit Map(std::string stageName);
+/**
+ * @brief get the vector of GameObjects in the background
+ * @param stageName the name of the stage, used to find the stage
+ * @return the vector of GameObjects in the background
+ */
+std::vector<std::shared_ptr<Util::GameObject>>
+GetBackgroundObjects(const std::string &stageName);
 
-    /**
-     * @brief Get the objects in the map
-     * @return the objects in the map
-     */
-    [[nodiscard]] std::vector<std::shared_ptr<Util::GameObject>>
-    GetObjects() const;
+/**
+ * @brief get the vector of GameObjects in the foreground
+ * @param stageName the name of the stage, used to find the stage
+ * @return the vector of GameObjects in the foreground
+ */
+std::vector<std::shared_ptr<Util::GameObject>>
+GetForegroundObjects(const std::string &stageName);
 
-    Map() = default;
-
-    ~Map() = default;
-
-private:
-    std::string m_StageName;
-    std::vector<std::shared_ptr<Util::GameObject>> m_Objects;
-};
-}; // namespace TileMap
+} // namespace TileMap
 
 #endif // TILE_MAP_HPP
