@@ -1,4 +1,4 @@
-#include "App.hpp"
+#include "Component/App.hpp"
 #include "PhaseEndingAnimation.hpp"
 #include "PhaseLose.hpp"
 #include "PhaseMenu.hpp"

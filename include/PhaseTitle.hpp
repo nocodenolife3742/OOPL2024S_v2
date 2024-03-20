@@ -2,9 +2,11 @@
 #define PHASE_TITLE_HPP
 
 #include "Component/AnimatedObject.hpp"
-#include "Phase.hpp"
+#include "Component/Phase.hpp"
 
 class PhaseTitle : public Phase {
+    using Phase::Phase;
+
 public:
     void Init(App *app) override;
 

@@ -21,6 +21,6 @@ void PhaseTitle::Update(App *app) {
 
 void PhaseTitle::Leave(App *app) {
     // free background resources
-    app->GetRoot()->RemoveAllChildren();
     m_Background = nullptr;
+    app->GetRoot()->RemoveAllChildren();
 }

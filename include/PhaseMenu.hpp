@@ -1,9 +1,11 @@
 #ifndef PHASE_MENU_HPP
 #define PHASE_MENU_HPP
 
-#include "Phase.hpp"
+#include "Component/Phase.hpp"
 
 class PhaseMenu : public Phase {
+    using Phase::Phase;
+
 public:
     void Init(App *app) override;
 

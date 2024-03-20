@@ -3,10 +3,12 @@
 
 #include "Component/AnimatedObject.hpp"
 #include "Component/ImageObject.hpp"
-#include "Phase.hpp"
+#include "Component/Phase.hpp"
 #include "Util/GameObject.hpp"
 
 class PhaseEndingAnimation : public Phase {
+    using Phase::Phase;
+
 public:
     void Init(App *app) override;
 

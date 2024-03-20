@@ -3,6 +3,7 @@
 #include "Util/Time.hpp"
 
 void PhaseEndingAnimation::Init(App *app) {
+    LOG_DEBUG("good");
     // init scrolling
     m_IsScrolling = true;
 
@@ -32,7 +33,7 @@ void PhaseEndingAnimation::Init(App *app) {
 
 void PhaseEndingAnimation::Update(App *app) {
     // calculate delta x for scrolling
-    double delta_x = Util::Time::GetDeltaTime() * 600;
+    double delta_x = Util::Time::GetDeltaTime() * 120;
 
     // if background is out of screen and not scrolling
     if (m_Background->GetPosition().x + delta_x >= 3840 && m_IsScrolling) {
@@ -66,14 +67,18 @@ void PhaseEndingAnimation::Update(App *app) {
         app->GetContext()->SetExit(true);
         return;
     }
+
+    // if esc key is pressed
+    if (Util::Input::IsKeyUp(Util::Keycode::UP)) {
+        app->ChangeState(GetLastState());
+    }
 }
 
 void PhaseEndingAnimation::Leave(App *app) {
-    // free background resources
-    app->GetRoot()->RemoveChild(m_Background);
+    // free resources
     m_Background = nullptr;
-
-    // free character resources
-    app->GetRoot()->RemoveChild(m_Character);
     m_Character = nullptr;
+
+    // remove all children from root
+    app->GetRoot()->RemoveAllChildren();
 }

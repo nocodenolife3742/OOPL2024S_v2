@@ -1,6 +1,4 @@
 set(SRC_FILES
-        App.cpp
-
         # Phases
         PhaseTitle.cpp
         PhaseMenu.cpp
@@ -9,15 +7,14 @@ set(SRC_FILES
         PhaseEndingAnimation.cpp
 
         # Components
+        Component/App.cpp
+        Component/Phase.cpp
         Component/AnimatedObject.cpp
         Component/ImageObject.cpp
         Component/TxtConverter.cpp
 )
 
 set(INCLUDE_FILES
-        App.hpp
-        Phase.hpp
-
         # Phases
         PhaseTitle.hpp
         PhaseMenu.hpp
@@ -26,6 +23,8 @@ set(INCLUDE_FILES
         PhaseEndingAnimation.hpp
 
         # Components
+        Component/App.hpp
+        Component/Phase.hpp
         Component/AnimatedObject.hpp
         Component/ImageObject.hpp
         Component/TxtConverter.hpp

@@ -11,9 +11,12 @@ public:
 
     virtual void Leave(App *app) = 0;
 
+    [[nodiscard]] App::State GetLastState() const;
+
+    explicit Phase(App::State lastState);
+
     ~Phase() = default;
 
-    Phase() = default;
 private:
     App::State m_LastState;
 };
