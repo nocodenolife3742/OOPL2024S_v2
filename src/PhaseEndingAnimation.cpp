@@ -8,7 +8,7 @@ void PhaseEndingAnimation::Init(App *app) {
 
     // init background
     m_Background = std::make_shared<ImageObject>(
-        RESOURCE_DIR "/Picture/UI/Credits/background.png");
+        RESOURCE_DIR "/Picture/UI/Credits.png");
     m_Background->SetScale({3, 3});
     m_Background->SetPosition({-3840, 0});
     m_Background->SetZIndex(0);
@@ -28,15 +28,17 @@ void PhaseEndingAnimation::Init(App *app) {
         ->SetPosition({0, 30});
     m_Character->SetZIndex(10);
     app->GetRoot()->AddChild(m_Character);
+
+    m_BGM = std::make_shared<Util::BGM>(RESOURCE_DIR"/Sound/Ending Animation.mp3");
+    m_BGM->Play(1);
 }
 
 void PhaseEndingAnimation::Update(App *app) {
     // calculate delta x for scrolling
-    double delta_x = Util::Time::GetDeltaTime() * 120;
+    double delta_x = Util::Time::GetDeltaTime() * 121;
 
     // if background is out of screen and not scrolling
     if (m_Background->GetPosition().x + delta_x >= 3840 && m_IsScrolling) {
-
         // set background to border of screen
         m_Background->SetPosition({3840, 0});
 
@@ -77,6 +79,7 @@ void PhaseEndingAnimation::Leave(App *app) {
     // free resources
     m_Background = nullptr;
     m_Character = nullptr;
+    m_BGM = nullptr;
 
     // remove all children from root
     app->GetRoot()->RemoveAllChildren();

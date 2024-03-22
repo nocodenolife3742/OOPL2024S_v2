@@ -9,6 +9,10 @@ void PhaseTitle::Init(App *app) {
         true, 500);
     m_Background->SetScale({3, 3});
     app->GetRoot()->AddChild(m_Background);
+
+    // set audio
+    m_BGM = std::make_shared<Util::BGM>(RESOURCE_DIR"/Sound/Start.mp3");
+    m_BGM->Play(1);
 }
 
 void PhaseTitle::Update(App *app) {
@@ -20,7 +24,12 @@ void PhaseTitle::Update(App *app) {
 }
 
 void PhaseTitle::Leave(App *app) {
-    // free background resources
+    // stop audio
+    m_BGM->Pause();
+
+    // free resources
     m_Background = nullptr;
+    m_BGM = nullptr;
+
     app->GetRoot()->RemoveAllChildren();
 }

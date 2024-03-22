@@ -10,6 +10,9 @@ void App::ChangeState(State state) {
     // reset the camera position
     ResetCameraPosition();
 
+    // remove all children from the root
+    m_Root->RemoveAllChildren();
+
     // leave the old state
     if (m_CurrentPhase)
         m_CurrentPhase->Leave(this);

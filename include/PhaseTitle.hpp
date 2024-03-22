@@ -3,6 +3,7 @@
 
 #include "Component/AnimatedObject.hpp"
 #include "Component/Phase.hpp"
+#include "Util/BGM.hpp"
 
 class PhaseTitle : public Phase {
 public:
@@ -16,7 +17,8 @@ public:
         : Phase(lastState){};
 
 private:
-    std::shared_ptr<AnimatedObject> m_Background;
+    std::shared_ptr<AnimatedObject> m_Background = nullptr;
+    std::shared_ptr<Util::BGM> m_BGM = nullptr;
 };
 
 #endif // PHASE_TITLE_HPP

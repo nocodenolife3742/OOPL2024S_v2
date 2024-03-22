@@ -2,7 +2,7 @@
 #include "Core/Context.hpp"
 
 int main(int, char **) {
-    App app(App::State::STAGE);
+    App app(App::State::TITLE);
 
     while (!app.GetContext()->GetExit()) {
         app.Update();

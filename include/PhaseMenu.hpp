@@ -2,6 +2,7 @@
 #define PHASE_MENU_HPP
 
 #include "Component/Phase.hpp"
+#include "Component/ImageObject.hpp"
 
 class PhaseMenu : public Phase {
 public:
@@ -13,6 +14,9 @@ public:
 
     explicit PhaseMenu(App::State lastState)
         : Phase(lastState){};
+
+private:
+    std::shared_ptr<ImageObject> m_Screen;
 };
 
 #endif // PHASE_MENU_HPP

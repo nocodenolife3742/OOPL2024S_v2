@@ -38,8 +38,18 @@ void PhaseStage::Update(App *app) {
         pos.x += Util::Time::GetDeltaTime() * 240;
         app->SetCameraPosition(pos);
     }
-    LOG_DEBUG("Camera Position: ({}, {})", app->GetCameraPosition().x,
-              app->GetCameraPosition().y);
+
+    // TODO : change this to win
+    if(Util::Input::IsKeyUp(Util::Keycode::I)) {
+        app->ChangeState(App::State::ENDING_ANIMATION);
+        return;
+    }
+
+    // TODO : change this to lose
+    if(Util::Input::IsKeyUp(Util::Keycode::O)) {
+        app->ChangeState(App::State::LOSE);
+        return;
+    }
 }
 
 void PhaseStage::Leave(App *app) {

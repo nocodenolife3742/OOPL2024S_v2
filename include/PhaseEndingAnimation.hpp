@@ -5,6 +5,7 @@
 #include "Component/ImageObject.hpp"
 #include "Component/Phase.hpp"
 #include "Util/GameObject.hpp"
+#include "Util/BGM.hpp"
 
 class PhaseEndingAnimation : public Phase {
 public:
@@ -21,6 +22,7 @@ private:
     bool m_IsScrolling = false;
     std::shared_ptr<ImageObject> m_Background = nullptr;
     std::shared_ptr<Util::GameObject> m_Character = nullptr;
+    std::shared_ptr<Util::BGM> m_BGM = nullptr;
 };
 
 #endif // PHASE_ENDING_ANIMATION_HPP
